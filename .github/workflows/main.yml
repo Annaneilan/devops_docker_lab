@@ -7,7 +7,7 @@ jobs:
   
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -16,7 +16,7 @@ jobs:
       - run: npm ci
   
   linter:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-22.04
     needs: [build]
     steps:
       - name: Checkout Code
@@ -32,7 +32,7 @@ jobs:
           
   build-image:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: [linter]
     
     steps:
@@ -41,7 +41,7 @@ jobs:
       run: docker build -t ${{secrets.DOCKERHUB_REPO}}:latest .
       
   push-image:
-      runs-on: ubuntu-latest
+      runs-on: ubuntu-22.04
       needs: [build-image]
 
       steps:
